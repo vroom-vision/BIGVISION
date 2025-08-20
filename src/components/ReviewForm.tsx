@@ -93,7 +93,7 @@ const ReviewForm: React.FC = () => {
       <form
         onSubmit={handleSubmit}
         className="max-w-xl mx-auto bg-purple-900/20 p-6 rounded-lg shadow-glow"
-        style={{ pointerEvents: "auto", zIndex: 100, position: "relative" }}
+        style={{ pointerEvents: "auto" }}
         autoComplete="off"
       >
         <div className="mb-4">

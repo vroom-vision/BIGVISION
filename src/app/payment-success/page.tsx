@@ -11,7 +11,6 @@ export default function PaymentSuccessPage() {
     <>
       {/* Mobile-only components */}
       <div className="md:hidden">
-        <MobileNavbar />
         <div className="relative">
           {/* Animate the mobile payment success page container */}
           <motion.div
