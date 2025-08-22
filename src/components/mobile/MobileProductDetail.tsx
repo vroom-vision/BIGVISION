@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import StarsCanvas from "@/components/StarBackground";
 import Link from "next/link";
+import Image from "next/image";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -39,9 +40,8 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
   const router = useRouter();
   const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
-  const [isZoomed, setIsZoomed] = React.useState(false);
 
-  const handleAddToCart = () => addToCart(product);
+  // ...existing code...
   const handleBuyNow = () => {
     addToCart(product);
     router.push("/checkout");
@@ -54,7 +54,7 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
     if (!product?.imageUrl?.length) return;
     setCurrentImageIndex(prev => prev === product.imageUrl.length - 1 ? 0 : prev + 1);
   };
-  const handleZoomToggle = () => setIsZoomed(prev => !prev);
+  // Removed zoom logic (setIsZoomed) as it's not defined and not used.
 
   return (
     <>
@@ -88,12 +88,15 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
           </motion.div>
           <motion.div variants={fadeInUp}>
             <div className="flex flex-col items-center mb-4">
-              <img
+              <Image
                 src={Array.isArray(product.imageUrl) ? product.imageUrl[currentImageIndex] : product.imageUrl}
                 alt={product.name}
+                width={300}
+                height={300}
                 className="w-full max-w-xs rounded-lg border border-white/10 mb-2"
                 style={{ objectFit: 'cover', maxHeight: 300 }}
-                onClick={handleZoomToggle}
+                // Removed zoom click handler
+                priority
               />
               {Array.isArray(product.imageUrl) && product.imageUrl.length > 1 && (
                 <div className="flex gap-2 mt-2">

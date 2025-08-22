@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -89,7 +89,7 @@ const MobileCheckoutPage: React.FC = () => {
         name: 'Vroom Visions',
         description: 'Product Purchase',
         order_id: orderData.id,
-        handler: async function (response: unknown) {
+    handler: async function () {
           try {
             await fetch("/api/razorpay/invoice", {
               method: "POST",
@@ -103,7 +103,7 @@ const MobileCheckoutPage: React.FC = () => {
                 paymentMethod: "Razorpay"
               })
             });
-          } catch (err) {
+          } catch {
             // ignore
           }
           window.location.href = `/payment-success?email=${encodeURIComponent(email)}`;
@@ -115,8 +115,7 @@ const MobileCheckoutPage: React.FC = () => {
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (error) {
-      const err = error as Error;
-      alert(err.message || 'Payment could not be processed');
+      alert((error as Error).message || 'Payment could not be processed');
       setPaymentStatus('idle');
     }
   };
@@ -191,7 +190,7 @@ const MobileCheckoutPage: React.FC = () => {
                 />
                 <div className="ml-3 flex-1">
                   <h3 className="font-medium text-white text-base">{item.product.name}</h3>
-                  <div className="font-medium mt-1 text-white">${((item.product.price * item.quantity) / 100).toFixed(2)} USD</div>
+                  <div className="font-medium mt-1 text-white">${((item.product.price * item.quantity) / 100).toFixed(2)} <span style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, letterSpacing: '0.04em' }}>USD</span></div>
                 </div>
                 <button
                   className="ml-auto text-gray-400 hover:text-white hover:bg-red-500/20 p-1 rounded-full transition-colors"
@@ -205,12 +204,12 @@ const MobileCheckoutPage: React.FC = () => {
           <div className="space-y-2 text-sm mb-4 p-3 rounded-lg bg-purple-950/40 backdrop-blur-sm border border-white/5">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span className="font-medium text-white">${(totalPriceUSD / 100).toFixed(2)} USD</span>
+              <span className="font-medium text-white">${(totalPriceUSD / 100).toFixed(2)} <span style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, letterSpacing: '0.04em' }}>USD</span></span>
             </div>
             {discountSuccess && (
               <div className="flex justify-between text-green-400">
                 <span>Discount (10%)</span>
-                <span>- ${((discountAmountUSD) / 100).toFixed(2)} USD</span>
+                <span>- ${((discountAmountUSD) / 100).toFixed(2)} <span style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, letterSpacing: '0.04em' }}>USD</span></span>
               </div>
             )}
             <div className="flex justify-between">
@@ -220,7 +219,7 @@ const MobileCheckoutPage: React.FC = () => {
           </div>
           <div className="flex justify-between font-bold text-lg p-3 rounded-lg bg-purple-950/40 backdrop-blur-sm border border-white/5 mt-4">
             <span>Total</span>
-            <span className="text-white">${(finalTotalUSD / 100).toFixed(2)} USD</span>
+            <span className="text-white">${(finalTotalUSD / 100).toFixed(2)} <span style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700, letterSpacing: '0.04em' }}>USD</span></span>
           </div>
         </motion.div>
         <motion.div className="bg-purple-900/20 backdrop-blur-md p-6 rounded-lg shadow-glow border border-white/10 mt-8" variants={fadeInUp} custom={4}>

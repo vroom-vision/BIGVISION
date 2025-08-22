@@ -29,6 +29,7 @@ interface CartContextType {
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
+  cartVersion: number;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -39,6 +40,7 @@ interface CartProviderProps {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartVersion, setCartVersion] = useState(0);
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -79,14 +81,17 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    setCartVersion(v => v + 1);
+  };
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, getTotalPrice }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, getTotalPrice, cartVersion }}>
       {children}
     </CartContext.Provider>
   );

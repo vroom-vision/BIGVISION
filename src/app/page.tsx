@@ -3,7 +3,7 @@
 import React from "react";
 import Home from "@/components/Home";
 import MobileHome from "@/components/mobile/MobileHome";
-import MobileNavbar from "@/components/mobile/MobileNavbar";
+// ...existing code...
 import Footer from "@/components/Footer";
 
 export default function Page() {

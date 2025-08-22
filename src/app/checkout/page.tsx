@@ -1,11 +1,10 @@
 // (removed duplicate import block and duplicate component declaration)
 "use client";
 import React from "react";
-import MobileNavbar from "@/components/mobile/MobileNavbar";
 import Footer from "@/components/Footer";
 import MobileCheckoutPage from "@/components/mobile/MobileCheckoutPage";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,8 +52,7 @@ const Checkout: React.FC = () => {
         throw new Error('PayPal approval URL not received');
       }
     } catch (error) {
-      const err = error as Error;
-      alert(err.message || 'Payment could not be processed');
+      alert((error as Error).message || 'Payment could not be processed');
       setPaymentStatus('idle');
     }
   };

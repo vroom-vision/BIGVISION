@@ -1,12 +1,18 @@
 "use client";
 import React from "react";
 import StarsCanvas from "@/components/StarBackground";
-import MobileNavbar from "@/components/mobile/MobileNavbar";
+// ...existing code...
 import Footer from "@/components/Footer";
 import MobilePaymentSuccessPage from "@/components/mobile/MobilePaymentSuccessPage";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useCart } from "@/contexts/CartContext";
 
 export default function PaymentSuccessPage() {
+  const { clearCart } = useCart();
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
   return (
     <>
       {/* Mobile-only components */}

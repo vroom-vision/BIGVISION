@@ -27,7 +27,9 @@ const Navbar: React.FC = () => {
 	const [pendingScrollId, setPendingScrollId] = useState<string | null>(null);
 	const [showCard, setShowCard] = useState(false);
 	const [checkoutDirection, setCheckoutDirection] = useState('slide_right');
-	const { cart, updateQuantity, removeFromCart } = useCart();
+	const { cart, removeFromCart, updateQuantity, cartVersion } = useCart();
+	// Re-render when cartVersion changes (cart cleared)
+	useEffect(() => {}, [cartVersion]);
 
 	// Close cart when clicking outside
 	useEffect(() => {
@@ -41,6 +43,14 @@ const Navbar: React.FC = () => {
 		document.addEventListener('mousedown', handleClick);
 		return () => document.removeEventListener('mousedown', handleClick);
 	}, [showCard]);
+
+	// Force re-render of cart sidebar when cartVersion changes
+	useEffect(() => {
+		if (showCard) {
+			setShowCard(false);
+			setTimeout(() => setShowCard(true), 50);
+		}
+	}, [cartVersion]);
 	// Removed duplicate declarations
 
 	useEffect(() => {

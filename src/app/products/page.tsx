@@ -5,8 +5,7 @@ import React from "react";
 import ProductCard from "@/components/ProductCard";
 import products from "@/data/products";
 import StarsCanvas from "@/components/StarsCanvas";
-import MobileNavbar from "@/components/mobile/MobileNavbar";
-import Footer from "@/components/Footer";
+// ...existing code...
 import MobileProductsPage from "@/components/mobile/MobileProductsPage";
 
 const Products: React.FC = () => {

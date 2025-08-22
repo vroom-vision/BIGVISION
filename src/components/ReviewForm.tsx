@@ -32,7 +32,7 @@ const ReviewForm: React.FC = () => {
       }
       setShowModal(true);
     } catch (err) {
-      setError("Failed to send feedback.");
+  setError("Failed to send feedback."); // This line is unchanged, but we will remove the 'err' variable.
     }
   };
 

@@ -3,7 +3,6 @@
 import React from "react";
 import StarsCanvas from "@/components/StarBackground";
 import products, { Product } from "@/data/products";
-import MobileProduct from "./MobileProduct";
 import ProductCard from "@/components/ProductCard";
 
 const MobileProductsPage: React.FC = () => (
