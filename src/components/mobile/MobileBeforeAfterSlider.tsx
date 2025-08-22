@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface MobileBeforeAfterSliderProps {
   beforeImage: string;
@@ -20,20 +21,27 @@ const MobileBeforeAfterSlider: React.FC<MobileBeforeAfterSliderProps> = ({ befor
 
   return (
     <div className="relative w-full max-w-xs mx-auto aspect-[4/5] select-none overflow-hidden rounded-lg shadow-glow border border-white/10 bg-black">
-      <img
+      <Image
         src={beforeImage}
         alt="Before"
+        fill
         className="absolute inset-0 w-full h-full object-cover"
         draggable={false}
         style={{ zIndex: 1 }}
+        sizes="100vw"
+        priority
       />
-      <img
+      <Image
         src={afterImage}
         alt="After"
+        fill
         className="absolute inset-0 h-full object-cover"
         draggable={false}
         style={{ width: `${position}%`, zIndex: 2, clipPath: `inset(0 ${100 - position}% 0 0)` }}
+        sizes="100vw"
+        priority
       />
+
       <motion.div
         className="absolute top-0 left-0 h-full w-1 bg-gradient-to-b from-[#7f53ac] to-[#657ced] z-10 cursor-pointer"
         style={{ x: `calc(${position}% - 2px)` }}

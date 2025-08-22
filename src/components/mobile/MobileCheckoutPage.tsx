@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
@@ -183,10 +184,13 @@ const MobileCheckoutPage: React.FC = () => {
           <div className="border-b border-white/10 pb-4 mb-4">
             {cart.map((item) => (
               <div key={item.product.id} className="flex mb-4 p-2 rounded-lg bg-purple-950/40 backdrop-blur-sm border border-white/5">
-                <img
+                <Image
                   src={Array.isArray(item.product.imageUrl) ? item.product.imageUrl[0] : item.product.imageUrl}
                   alt={item.product.name}
+                  width={64}
+                  height={64}
                   className="w-16 h-16 rounded object-cover border border-white/10"
+                  priority
                 />
                 <div className="ml-3 flex-1">
                   <h3 className="font-medium text-white text-base">{item.product.name}</h3>

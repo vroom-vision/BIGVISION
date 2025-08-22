@@ -127,7 +127,7 @@ const Checkout: React.FC = () => {
         name: 'Vroom Visions',
         description: 'Product Purchase',
         order_id: orderData.id,
-        handler: async function (response: unknown) {
+        handler: async function () {
           try {
             await fetch("/api/razorpay/invoice", {
               method: "POST",
@@ -141,7 +141,7 @@ const Checkout: React.FC = () => {
                 paymentMethod: "Razorpay"
               })
             });
-          } catch (err) {
+          } catch {
             // ignore
           }
           window.location.href = `/payment-success?email=${encodeURIComponent(email)}`;
@@ -153,8 +153,7 @@ const Checkout: React.FC = () => {
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (error) {
-      const err = error as Error;
-      alert(err.message || 'Payment could not be processed');
+      alert((error as Error).message || 'Payment could not be processed');
       setPaymentStatus('idle');
     }
   };

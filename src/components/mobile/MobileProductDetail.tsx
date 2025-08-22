@@ -41,11 +41,6 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
   const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
-  // ...existing code...
-  const handleBuyNow = () => {
-    addToCart(product);
-    router.push("/checkout");
-  };
   const goToPreviousImage = () => {
     if (!product?.imageUrl?.length) return;
     setCurrentImageIndex(prev => prev === 0 ? product.imageUrl.length - 1 : prev - 1);
@@ -54,7 +49,10 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
     if (!product?.imageUrl?.length) return;
     setCurrentImageIndex(prev => prev === product.imageUrl.length - 1 ? 0 : prev + 1);
   };
-  // Removed zoom logic (setIsZoomed) as it's not defined and not used.
+  const handleBuyNow = () => {
+    addToCart(product);
+    router.push("/checkout");
+  };
 
   return (
     <>
@@ -95,7 +93,6 @@ const MobileProductDetail: React.FC<MobileProductDetailProps> = ({ product }) =>
                 height={300}
                 className="w-full max-w-xs rounded-lg border border-white/10 mb-2"
                 style={{ objectFit: 'cover', maxHeight: 300 }}
-                // Removed zoom click handler
                 priority
               />
               {Array.isArray(product.imageUrl) && product.imageUrl.length > 1 && (

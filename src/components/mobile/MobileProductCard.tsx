@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface MobileProductCardProps {
   imageUrl: string;
@@ -18,10 +19,13 @@ const MobileProductCard: React.FC<MobileProductCardProps> = ({ imageUrl, name, p
       whileTap={{ scale: 0.97 }}
       onClick={onClick}
     >
-      <img
+      <Image
         src={imageUrl}
         alt={name}
+        width={112}
+        height={112}
         className="w-28 h-28 object-cover rounded mb-2 border border-white/10"
+        priority
       />
       <div className="font-semibold text-white text-base text-center mb-1">{name}</div>
       <div className="text-purple-200 text-sm font-medium">₹{price}</div>
